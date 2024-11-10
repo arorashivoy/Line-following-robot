@@ -50,7 +50,7 @@ def move(s1, s2, s3, s4, s5):
     found_line = found_line or s2 == 0 or s3 == 0 or s4 == 0
     # found_line = found_line or s1 == 0 or s2 == 0 or s3 == 0 or s4 == 0 or s5 == 0
     if not found_line:
-        robot.right()
+        robot.right(speed=0.5)
     if s3 == 0:
         robot.forward(speed=0.5)
     elif s4 == 0:
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     found_line = False
     found_line = found_line or S2.value == 0 or S3.value == 0 or S4.value == 0
     while not found_line:
-        robot.right()
+        robot.right(speed=0.5)
         sleep(0.01)
         found_line = found_line or S2.value == 0 or S3.value == 0 or S4.value == 0
 
