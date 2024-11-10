@@ -19,6 +19,7 @@ class Colors:
     WHITE = "\033[0;37m"
     RESET = "\033[0m"
 
+
 ###############################################################################
 # Global Vars
 ###############################################################################
@@ -70,7 +71,7 @@ async def move(x: float, y: float, angle: float):
     # Calculating the speed
     speed = max(min(sqrt(pow(x, 2) + pow(y, 2)), 1), 0)
 
-    print(Colors.GREEN + Colors.BOLD + f"x: {x}, y: {y}, speed: {speed}" + Colors.RESET)
+    # print(Colors.GREEN + Colors.BOLD + f"x: {x}, y: {y}, speed: {speed}" + Colors.RESET)
 
     # Forward or backward
     if y > 0:
@@ -89,8 +90,17 @@ async def move(x: float, y: float, angle: float):
             robot.backward(speed=speed)
     else:
         robot.stop()
-    
+
     return {"x": x, "y": y}
+
+@app.get("/rotate/{clockwise}")
+async def rotate(clockwise: bool):
+    if clockwise:
+        robot.right()
+    else:
+        robot.left()
+
+    return {"clockwise": clockwise}
 
 # ###############################################################################
 # # Main loop

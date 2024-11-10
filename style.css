@@ -29,3 +29,25 @@ html {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+svg {
+    cursor: pointer;
+    margin: 10px;
+    transition: transform 0.2s;
+}
+
+#rotate_clockwise {
+    transform: rotate(180deg);
+}
+
+#rotate_counterclockwise {
+    transform: rotate(180deg) scaleX(-1);
+}
+
+
+#rotate_clockwise:hover {
+    transform: scale(1.1) rotate(195deg);
+}
+
+#rotate_counterclockwise:hover {
+    transform: scaleX(-1.1) scaleY(1.1) rotate(195deg);
+}

@@ -36,6 +36,13 @@ window.addEventListener('load', () => {
         stopDrawing(event);
     });
 
+    document.getElementById('rotate_clockwise').addEventListener('click', () => {
+        call_rotate_api(true);
+    });
+
+    document.getElementById('rotate_counterclockwise').addEventListener('click', () => {
+        call_rotate_api(false);
+   });
 });
 
 var width, height, radius, x_orig, y_orig;
@@ -158,4 +165,16 @@ function call_api(x, y, angle) {
     });
 }
 
-
+function call_rotate_api(clockwise) {
+    var url = `${main_url}/rotate/${clockwise}`;
+    $.ajax({
+        url: url,
+        method: 'GET',
+        success: function (response) {
+            console.log("API Response:", response);
+        },
+        error: function (xhr, status, error) {
+            console.error("API Error:", status, error);
+        }
+    });
+}
