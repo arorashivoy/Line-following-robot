@@ -36,29 +36,38 @@ window.addEventListener('load', () => {
         stopDrawing(event);
     });
 
-    document.getElementById('rotate_clockwise').addEventListener('click', () => {
+    document.getElementById('rotate_clockwise').addEventListener('mousedown', () => {
         call_rotate_api(true);
     });
 
-    document.getElementById('rotate_counterclockwise').addEventListener('click', () => {
+    document.getElementById('rotate_counterclockwise').addEventListener('mousedown', () => {
         call_rotate_api(false);
-   });
+    });
+
+    document.getElementById('rotate_clockwise').addEventListener('touchstart', () => {
+        call_rotate_api(true);
+    });
+
+    document.getElementById('rotate_counterclockwise').addEventListener('touchstart', () => {
+        call_rotate_api(false);
+    });
+    
 });
 
 var width, height, radius, x_orig, y_orig;
 function resize() {
     width = window.innerWidth;
     radius = 100;
-    height = radius * 6.5;
+    height = radius * 4.5;
     ctx.canvas.width = width;
     ctx.canvas.height = height;
     background();
-    joystick(width / 2, height / 3);
+    joystick(width / 2, height / 2);
 }
 
 function background() {
     x_orig = width / 2;
-    y_orig = height / 3;
+    y_orig = height / 2;
 
     ctx.beginPath();
     ctx.arc(x_orig, y_orig, radius + 20, 0, 2 * Math.PI * 2, true);
@@ -107,7 +116,7 @@ function stopDrawing() {
     paint = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     background();
-    joystick(width / 2, height / 3);
+    joystick(width / 2, height / 2);
     document.getElementById("x_coordinate").innerText = 0;
     document.getElementById("y_coordinate").innerText = 0;
     document.getElementById("angle").innerText = 0;

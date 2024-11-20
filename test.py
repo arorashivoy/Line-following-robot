@@ -8,12 +8,12 @@ from time import sleep
 # Pins
 ###############################################################################
 # Motor pins
-LEFT_FORWARD_PIN = 8
-LEFT_BACKWARD_PIN = 7
+LEFT_FORWARD_PIN = 7
+LEFT_BACKWARD_PIN = 8
 LEFT_ENABLE_PIN = 25
 
-RIGHT_FORWARD_PIN = 9
-RIGHT_BACKWARD_PIN = 10
+RIGHT_FORWARD_PIN = 10
+RIGHT_BACKWARD_PIN = 9
 RIGHT_ENABLE_PIN = 11
 
 # Line sensor pins
@@ -87,15 +87,15 @@ def move(s1, s2, s3, s4, s5):
     # sleep(2)
 
     print('forward')
-    robot.forward(speed=0.2)
+    robot.forward(speed=0.5)
     sleep(1)
 
     print('right')
-    robot.forward(speed=0.2, curve_right=1)
+    robot.forward(speed=0.5, curve_right=1)
     sleep(1)
 
     print('left')
-    robot.forward(speed=0.2, curve_left=1)
+    robot.forward(speed=0.5, curve_left=1)
     sleep(1)
 
     print('stop')

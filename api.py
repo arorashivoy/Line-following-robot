@@ -30,12 +30,12 @@ app = FastAPI()
 # Pins
 ###############################################################################
 # Motor pins
-LEFT_FORWARD_PIN = 8
-LEFT_BACKWARD_PIN = 7
+LEFT_FORWARD_PIN = 7
+LEFT_BACKWARD_PIN = 8
 LEFT_ENABLE_PIN = 25
 
-RIGHT_FORWARD_PIN = 9
-RIGHT_BACKWARD_PIN = 10
+RIGHT_FORWARD_PIN = 10
+RIGHT_BACKWARD_PIN = 9
 RIGHT_ENABLE_PIN = 11
 
 # Line sensor pins

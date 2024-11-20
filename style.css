@@ -9,7 +9,19 @@
 html {
     overflow: hidden;
     touch-action: none;
+    user-select: none;
 }
+
+body {
+    user-select: none;
+}
+div {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .joystick-container {
   position: relative;
   width: 300px;
