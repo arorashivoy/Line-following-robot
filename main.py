@@ -50,12 +50,16 @@ robot = Robot(leftMotor, rightMotor)
 ###############################################################################
 def move(s1, s2, s3, s4, s5):
     global done
+    while S1.value == 0 and S2.value == 0 and S3.value == 0 and S4.value == 0 and S5.value == 0:
+        robot.right(speed=0.3)
+        sleep(0.01)
+
     if s3 == 0 and s2 == 0 and s4 == 0:
         robot.forward(speed=speed)
     elif s4 == 0:
-        robot.forward(speed=speed, curve_right=0.7)
+        robot.forward(speed=speed, curve_right=0.5)
     elif s2 == 0:
-        robot.forward(speed=speed, curve_left=0.7)
+        robot.forward(speed=speed, curve_left=0.5)
     elif s5 == 0:
         robot.forward(speed=speed, curve_right=1)
     elif s1 == 0:
@@ -69,15 +73,12 @@ def move(s1, s2, s3, s4, s5):
 # Main loop
 ###############################################################################
 if __name__ == "__main__":
-    found_line = False
-    found_line = found_line or S1.value == 0 or S2.value == 0 or S3.value == 0 or S4.value == 0 or S5.value == 0
-    while not found_line:
-        robot.right(speed=0.5)
+    while not (S1.value == 0 or S2.value == 0 or S3.value == 0 or S4.value == 0 or S5.value == 0):
+        robot.right(speed=0.3)
         sleep(0.01)
-        found_line = found_line or S2.value == 0 or S3.value == 0 or S4.value == 0
 
     while S1.value == 0 and S2.value == 0 and S3.value == 0 and S4.value == 0 and S5.value == 0:
-        robot.right(speed=0.5)
+        robot.right(speed=0.3)
         sleep(0.01)
 
 

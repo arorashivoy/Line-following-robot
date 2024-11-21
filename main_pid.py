@@ -8,13 +8,13 @@ from simple_pid import PID
 # Global Vars
 ###############################################################################
 done = False
-speed = 0.4
+speed = 0.8
 # speed = 1
 
 # Initialize the PID controller
-Kp = 10
-Ki = 5
-Kd = 80
+Kp = 5
+Ki = 1
+Kd = 40
 pid = PID(Kp=Kp, Ki=Ki, Kd=Kd, setpoint=0)
 
 ###############################################################################
@@ -58,7 +58,7 @@ def move(s1, s2, s3, s4, s5):
     global done, speed
 
     # Calculate the error based on sensor values
-    error = (s1 * -100 + s2 * -10 + s3 * 1 + s4 * 10 + s5 * 100)
+    error = (s1 * -10 + s2 * -20 + s3 * 0 + s4 * 20 + s5 * 10)
 
     # Compute the correction using the PID controller
     correction = pid(error)
@@ -66,19 +66,19 @@ def move(s1, s2, s3, s4, s5):
     # Normalize the correction to be between 0 and 1
     correction = max(min(correction, 1), -1)
 
-    # Apply the correction to the robot's movement
-    if s2 == 0 and s3 == 0 and s4 == 0:
-        robot.forward(speed=speed)
-    else:
-        curve_left = abs(correction) if correction > 0 else 0
-        curve_right = abs(correction) if correction < 0 else 0
-        # print(f"Curve Left: {curve_left}, Curve Right: {curve_right}")
-        robot.forward(speed=speed, curve_left=curve_left, curve_right=curve_right)
+    # # Apply the correction to the robot's movement
+    # if s2 == 0 and s3 == 0 and s4 == 0:
+    #     robot.forward(speed=speed)
+    # else:
+    #     curve_left = abs(correction) if correction > 0 else 0
+    #     curve_right = abs(correction) if correction < 0 else 0
+    #     # print(f"Curve Left: {curve_left}, Curve Right: {curve_right}")
+    #     robot.forward(speed=speed, curve_left=curve_left, curve_right=curve_right)
 
-    # curve_left = abs(correction) if correction < 0 else 0
-    # curve_right = abs(correction) if correction > 0 else 0
-    # # print(f"Curve Left: {curve_left}, Curve Right: {curve_right}")
-    # robot.forward(speed=speed, curve_left=curve_left, curve_right=curve_right)
+    curve_left = abs(correction) if correction < 0 else 0
+    curve_right = abs(correction) if correction > 0 else 0
+    # print(f"Curve Left: {curve_left}, Curve Right: {curve_right}")
+    robot.forward(speed=speed, curve_left=curve_left, curve_right=curve_right)
 
 
     # Stop the robot if no sensors are active
@@ -101,7 +101,7 @@ if __name__ == "__main__":
     while True:
         if (done):
             print("Done")
-            # break
+            break
         move(S1.value, S2.value, S3.value, S4.value, S5.value)
         # print(S1.value, S2.value, S3.value, S4.value, S5.value)
         # sleep(0.01)
