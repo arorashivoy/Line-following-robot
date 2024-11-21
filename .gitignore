@@ -1,1 +1,3 @@
 venv/
+.jukit/
+__pycache__/
