@@ -8,13 +8,13 @@ from simple_pid import PID
 # Global Vars
 ###############################################################################
 done = False
-speed = 0.8
+speed = 0.4
 # speed = 1
 
 # Initialize the PID controller
-Kp = 5
+Kp = 0.5
 Ki = 1
-Kd = 40
+Kd = 0
 pid = PID(Kp=Kp, Ki=Ki, Kd=Kd, setpoint=0)
 
 ###############################################################################
@@ -58,7 +58,8 @@ def move(s1, s2, s3, s4, s5):
     global done, speed
 
     # Calculate the error based on sensor values
-    error = (s1 * -10 + s2 * -20 + s3 * 0 + s4 * 20 + s5 * 10)
+    # Not as when line is detected, sensor value is 0
+    error = ((not s1) * -1 + (not s2) * -1 + (not s3) * 0 + (not s4) * 1 + (not s5) * 1)
 
     # Compute the correction using the PID controller
     correction = pid(error)
@@ -75,8 +76,8 @@ def move(s1, s2, s3, s4, s5):
     #     # print(f"Curve Left: {curve_left}, Curve Right: {curve_right}")
     #     robot.forward(speed=speed, curve_left=curve_left, curve_right=curve_right)
 
-    curve_left = abs(correction) if correction < 0 else 0
-    curve_right = abs(correction) if correction > 0 else 0
+    curve_left = abs(correction) if correction > 0 else 0
+    curve_right = abs(correction) if correction < 0 else 0
     # print(f"Curve Left: {curve_left}, Curve Right: {curve_right}")
     robot.forward(speed=speed, curve_left=curve_left, curve_right=curve_right)
 
